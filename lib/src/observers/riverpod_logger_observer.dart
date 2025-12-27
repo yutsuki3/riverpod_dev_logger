@@ -96,28 +96,23 @@ base class RiverpodLoggerObserver extends ProviderObserver {
   }
 
   /// Helper to resolve (provider, container) from either 2.x or 3.x signatures.
-  (ProviderBase<Object?>, ProviderContainer) _resolveContext(
+  (dynamic, ProviderContainer) _resolveContext(
     dynamic arg1,
     dynamic arg2, [
     dynamic arg3,
   ]) {
     if (_isContext(arg1)) {
       // In 3.x, arg1 is ProviderObserverContext which has 'provider' and 'container' fields.
-      return (arg1.provider as ProviderBase<Object?>,
-          arg1.container as ProviderContainer);
+      return (arg1.provider, arg1.container as ProviderContainer);
     }
 
     // Fallback to 2.x signature (provider, ..., container)
-    final provider = arg1 as ProviderBase<Object?>;
+    // We treat the provider as dynamic to avoid Undefined class errors on pub.dev.
+    final provider = arg1;
 
     // Detection based on method:
     // didAdd(provider, value, container) -> arg3
     // didUpdate(provider, prev, next, container) -> arg3 (container is 4th in 2.x, so arg3 here if arg1/2/3)
-    // Actually, in our override:
-    // didUpdateProvider(provider, prev, next, [container, _unused])
-    // arg1=provider, arg2=prev, arg3=container? No, next is positional.
-    // Let's refine the detection.
-
     if (arg3 is ProviderContainer) return (provider, arg3);
     if (arg2 is ProviderContainer) return (provider, arg2);
 
