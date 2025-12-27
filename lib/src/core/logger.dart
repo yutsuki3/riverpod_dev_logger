@@ -24,7 +24,8 @@ class RiverpodDevLogger {
   }) {
     if (level != null) _level = level;
     if (formatter != null) _formatter = formatter;
-    if (enableContextDetection != null) _enableContextDetection = enableContextDetection;
+    if (enableContextDetection != null)
+      _enableContextDetection = enableContextDetection;
     if (enableStateDiff != null) _enableStateDiff = enableStateDiff;
   }
 
@@ -58,7 +59,8 @@ class RiverpodDevLogger {
   }) {
     if (level.index < _level.index) return;
 
-    final context = _enableContextDetection ? ContextDetector.currentContext : null;
+    final context =
+        _enableContextDetection ? ContextDetector.currentContext : null;
     final event = LogEvent(
       level: level,
       message: message,

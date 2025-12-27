@@ -10,7 +10,7 @@ class RiverpodLoggerObserver extends ProviderObserver {
   final _diffEngine = DiffEngine();
   final _diffFormatter = ConsoleDiffFormatter();
 
-  RiverpodLoggerObserver({RiverpodDevLogger? logger}) 
+  RiverpodLoggerObserver({RiverpodDevLogger? logger})
       : _logger = logger ?? RiverpodDevLogger();
 
   @override
@@ -69,14 +69,14 @@ class RiverpodLoggerObserver extends ProviderObserver {
   }
 
   void _runInContext(
-    ProviderBase provider, 
+    ProviderBase provider,
     ProviderContainer container,
     void Function() action,
   ) {
     // Attempt to find dependencies (this is tricky in Riverpod 2.x/3.x without internal access,
     // but we can try to get them if available or just log the provider info)
     final dependencies = <String>[];
-    
+
     final context = ProviderContext(
       providerName: provider.name ?? provider.runtimeType.toString(),
       providerType: provider.runtimeType.toString(),

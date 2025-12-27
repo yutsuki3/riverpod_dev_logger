@@ -9,7 +9,8 @@ class DiffResult {
     this.removed = const [],
   });
 
-  bool get hasChanges => changes.isNotEmpty || added.isNotEmpty || removed.isNotEmpty;
+  bool get hasChanges =>
+      changes.isNotEmpty || added.isNotEmpty || removed.isNotEmpty;
 }
 
 class FieldChange {

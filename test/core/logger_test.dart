@@ -3,7 +3,8 @@ import 'package:riverpod_dev_logger/riverpod_dev_logger.dart';
 
 void main() {
   group('RiverpodDevLogger', () {
-    test('should log messages (manually verified by output or mock formatter)', () {
+    test('should log messages (manually verified by output or mock formatter)',
+        () {
       final logger = RiverpodDevLogger();
       // This mainly checks for no crashes
       logger.debug('Debug message');
@@ -25,9 +26,12 @@ void main() {
         context: context,
         extra: {'id': 1},
       );
-      
+
       final output = formatter.format(event);
-      expect(output[0], contains('[INFO] [Provider:TestProvider] [Dependencies:Dep1, Dep2] Hello'));
+      expect(
+          output[0],
+          contains(
+              '[INFO] [Provider:TestProvider] [Dependencies:Dep1, Dep2] Hello'));
       expect(output[1], contains('Extra: {id: 1}'));
     });
 

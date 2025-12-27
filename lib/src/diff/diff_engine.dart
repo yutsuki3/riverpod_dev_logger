@@ -66,10 +66,12 @@ class DiffEngine {
 
       if (!prev.containsKey(key)) {
         added.add(currentPath);
-        changes.add(FieldChange(key: currentPath, oldValue: null, newValue: nextValue));
+        changes.add(
+            FieldChange(key: currentPath, oldValue: null, newValue: nextValue));
       } else if (!next.containsKey(key)) {
         removed.add(currentPath);
-        changes.add(FieldChange(key: currentPath, oldValue: prevValue, newValue: null));
+        changes.add(
+            FieldChange(key: currentPath, oldValue: prevValue, newValue: null));
       } else {
         _compare(prevValue, nextValue, currentPath, changes, added, removed);
       }
@@ -90,10 +92,12 @@ class DiffEngine {
       final currentPath = '$path[$i]';
       if (i >= prev.length) {
         added.add(currentPath);
-        changes.add(FieldChange(key: currentPath, oldValue: null, newValue: next[i]));
+        changes.add(
+            FieldChange(key: currentPath, oldValue: null, newValue: next[i]));
       } else if (i >= next.length) {
         removed.add(currentPath);
-        changes.add(FieldChange(key: currentPath, oldValue: prev[i], newValue: null));
+        changes.add(
+            FieldChange(key: currentPath, oldValue: prev[i], newValue: null));
       } else {
         _compare(prev[i], next[i], currentPath, changes, added, removed);
       }
@@ -113,11 +117,13 @@ class DiffEngine {
 
     for (final item in removedItems) {
       removed.add('$path{$item}');
-      changes.add(FieldChange(key: '$path{$item}', oldValue: item, newValue: null));
+      changes.add(
+          FieldChange(key: '$path{$item}', oldValue: item, newValue: null));
     }
     for (final item in addedItems) {
       added.add('$path{$item}');
-      changes.add(FieldChange(key: '$path{$item}', oldValue: null, newValue: item));
+      changes.add(
+          FieldChange(key: '$path{$item}', oldValue: null, newValue: item));
     }
   }
 

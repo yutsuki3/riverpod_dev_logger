@@ -30,7 +30,9 @@ class TodoNotifier extends Notifier<List<String>> {
   }
 }
 
-final todoProvider = NotifierProvider<TodoNotifier, List<String>>(TodoNotifier.new, name: 'TodoProvider');
+final todoProvider = NotifierProvider<TodoNotifier, List<String>>(
+    TodoNotifier.new,
+    name: 'TodoProvider');
 
 void main() {
   // 4. Configure the logger

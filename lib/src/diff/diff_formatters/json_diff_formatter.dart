@@ -7,11 +7,13 @@ class JsonDiffFormatter implements DiffFormatter {
   String format(DiffResult result) {
     final map = {
       'hasChanges': result.hasChanges,
-      'changes': result.changes.map((c) => {
-        'key': c.key,
-        'old': c.oldValue.toString(),
-        'new': c.newValue.toString(),
-      }).toList(),
+      'changes': result.changes
+          .map((c) => {
+                'key': c.key,
+                'old': c.oldValue.toString(),
+                'new': c.newValue.toString(),
+              })
+          .toList(),
       'added': result.added,
       'removed': result.removed,
     };

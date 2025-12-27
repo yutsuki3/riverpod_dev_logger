@@ -67,8 +67,12 @@ void main() {
   group('Nested Object Diff', () {
     test('detects changes in nested map', () {
       final diff = engine.diff(
-        {'user': {'name': 'Alice', 'age': 30}},
-        {'user': {'name': 'Alice', 'age': 31}},
+        {
+          'user': {'name': 'Alice', 'age': 30}
+        },
+        {
+          'user': {'name': 'Alice', 'age': 31}
+        },
       );
       expect(diff.changes.first.key, 'user.age');
       expect(diff.changes.first.oldValue, 30);
@@ -94,7 +98,8 @@ void main() {
       final stopwatch = Stopwatch()..start();
       engine.diff(large1, large2);
       stopwatch.stop();
-      print('Diff large list (1000 items) took: ${stopwatch.elapsedMilliseconds}ms');
+      print(
+          'Diff large list (1000 items) took: ${stopwatch.elapsedMilliseconds}ms');
       expect(stopwatch.elapsedMilliseconds, lessThan(100)); // Should be fast
     });
   });

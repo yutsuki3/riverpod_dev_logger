@@ -12,6 +12,6 @@ class ProviderContext {
   });
 
   @override
-  String toString() => 
+  String toString() =>
       'ProviderContext(name: $providerName, type: $providerType, dependencies: $dependencies, extra: $extra)';
 }

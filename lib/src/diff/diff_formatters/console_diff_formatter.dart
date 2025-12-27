@@ -11,7 +11,7 @@ class ConsoleDiffFormatter implements DiffFormatter {
 
     for (final change in result.changes) {
       final key = change.key.isEmpty ? 'state' : change.key;
-      
+
       if (result.added.contains(change.key)) {
         buffer.writeln('  + $key: ${change.newValue}');
       } else if (result.removed.contains(change.key)) {

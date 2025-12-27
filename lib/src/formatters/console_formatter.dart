@@ -6,17 +6,18 @@ class ConsoleFormatter implements LogFormatter {
   List<String> format(LogEvent event) {
     final level = event.level.name.toUpperCase();
     String provider = event.context?.providerName ?? 'unknown';
-    
+
     // Fallback to extra if context is missing
     if (provider == 'unknown' && event.extra != null) {
       provider = event.extra!['provider']?.toString() ?? 'unknown';
     }
 
     final deps = event.context?.dependencies?.join(', ') ?? 'none';
-    
+
     final buffer = <String>[];
-    buffer.add('[$level] [Provider:$provider] [Dependencies:$deps] ${event.message}');
-    
+    buffer.add(
+        '[$level] [Provider:$provider] [Dependencies:$deps] ${event.message}');
+
     if (event.extra != null && event.extra!.isNotEmpty) {
       buffer.add('  Extra: ${event.extra}');
     }
@@ -27,7 +28,7 @@ class ConsoleFormatter implements LogFormatter {
     if (event.stackTrace != null) {
       buffer.add('  StackTrace:\n${event.stackTrace}');
     }
-    
+
     return buffer;
   }
 }

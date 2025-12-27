@@ -11,7 +11,7 @@ extension RiverpodDevLoggerRefX on Ref {
       // ignore: avoid_dynamic_calls
       providerName = (this as dynamic).provider.name;
     } catch (_) {}
-    
+
     return RiverpodDevLogger().bind(extra: {
       'provider': providerName ?? runtimeType.toString(),
     });
