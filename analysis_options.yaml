@@ -1,0 +1,10 @@
+include: package:lints/recommended.yaml
+
+linter:
+  rules:
+    # Additional rules for better code quality
+    always_declare_return_types: true
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    unawaited_futures: true
+    use_super_parameters: true

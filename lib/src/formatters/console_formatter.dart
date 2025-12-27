@@ -1,5 +1,4 @@
 import '../core/log_event.dart';
-import '../core/log_level.dart';
 import 'formatter.dart';
 
 class ConsoleFormatter implements LogFormatter {

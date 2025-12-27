@@ -4,10 +4,11 @@ A developer-focused logging package for Riverpod 3.0+ that automatically detects
 
 ## Features
 
-- **Automatic Provider Context Detection**: Logs automatically include the name and type of the provider that emitted them.
-- **Riverpod 3.0 Compatible**: Built to work with the latest Riverpod features.
-- **Clean Console Output**: Organized logs with level, provider, dependencies, and message.
-- **Extensible**: Custom formatters and child loggers for extra context.
+- **Automatic Provider Context Detection**: No more manual tags! Logs automatically include the name and type of the provider that emitted them via Dart Zones.
+- **Riverpod 3.0 Ready**: Built explicitly for the latest Riverpod features and patterns.
+- **Structured Console Output**: Beautifully organized logs with level, provider info, dependencies, and extra metadata.
+- **Hierarchical Loggers**: Use `.bind()` to create child loggers with additional context like `userId` or `requestId`.
+- **Extensible Formatters**: Easily customize how logs are printed or sent to remote services.
 
 ## Installation
 

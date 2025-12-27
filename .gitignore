@@ -1,0 +1,21 @@
+# https://dart.dev/guides/libraries/private-files
+
+# Files and directories created by pub
+.dart_tool/
+.packages
+.pub/
+build/
+# If you're building a package, you might want to check in pubspec.lock
+# pubspec.lock
+
+# IDE specific files
+.metadata
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# MacOS files
+.DS_Store

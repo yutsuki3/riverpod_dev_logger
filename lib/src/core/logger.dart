@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'package:meta/meta.dart';
 import 'log_level.dart';
 import 'log_event.dart';
-import '../context/provider_context.dart';
 import '../context/context_detector.dart';
 import '../formatters/formatter.dart';
 import '../formatters/console_formatter.dart';
