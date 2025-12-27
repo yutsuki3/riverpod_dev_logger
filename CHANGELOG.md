@@ -1,3 +1,11 @@
+# 0.0.3
+
+- **Upgraded to Riverpod 3.1.0**.
+- Refactored `RiverpodLoggerObserver` to support the new `ProviderObserver` API.
+- Simplified dependencies (removed `riverpod_test`).
+- Improved code quality and fixed lint issues.
+- Updated documentation for Riverpod 3.0+ compatibility.
+
 # 0.0.2
 
 - Added **State Diff Tracking** support.
