@@ -20,8 +20,9 @@ base class RiverpodLoggerObserver extends ProviderObserver {
   @override
   // ignore: avoid_renaming_method_parameters
   void didAddProvider(dynamic provider, Object? value,
-      [dynamic container, ProviderContainer? _unused]) {
-    final (actualProvider, actualContainer) = _resolveContext(provider, value, container);
+      [dynamic container, ProviderContainer? unusedContainer]) {
+    final (actualProvider, actualContainer) =
+        _resolveContext(provider, value, container);
     final actualValue = _isContext(provider) ? value : container;
 
     _runInContext(actualProvider, actualContainer, () {
@@ -36,7 +37,7 @@ base class RiverpodLoggerObserver extends ProviderObserver {
     Object? previousValue,
     Object? newValue, [
     dynamic container,
-    ProviderContainer? _unused,
+    ProviderContainer? unusedContainer,
   ]) {
     final (actualProvider, actualContainer) =
         _resolveContext(provider, previousValue, container);
@@ -62,7 +63,8 @@ base class RiverpodLoggerObserver extends ProviderObserver {
   @override
   // ignore: avoid_renaming_method_parameters
   void didDisposeProvider(dynamic provider, [ProviderContainer? container]) {
-    final (actualProvider, actualContainer) = _resolveContext(provider, container);
+    final (actualProvider, actualContainer) =
+        _resolveContext(provider, container);
 
     _runInContext(actualProvider, actualContainer, () {
       _logger.debug('Provider disposed');
@@ -76,13 +78,14 @@ base class RiverpodLoggerObserver extends ProviderObserver {
     Object error,
     StackTrace stackTrace, [
     dynamic container,
-    ProviderContainer? _unused,
+    ProviderContainer? unusedContainer,
   ]) {
     final (actualProvider, actualContainer) =
         _resolveContext(provider, error, container);
 
     final actualError = _isContext(provider) ? error : stackTrace;
-    final actualStackTrace = _isContext(provider) ? stackTrace : container as StackTrace;
+    final actualStackTrace =
+        _isContext(provider) ? stackTrace : container as StackTrace;
 
     _runInContext(actualProvider, actualContainer, () {
       _logger.error('Provider failed', actualError, actualStackTrace);

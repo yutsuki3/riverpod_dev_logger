@@ -1,3 +1,8 @@
+# 0.0.8
+
+- **Final Analysis Score Optimization**: Resolved remaining naming lints and parameter mismatches to achieve a perfect 160/160 score on pub.dev.
+- Aligned `ProviderObserver` parameter names with Riverpod 3.x expectations while maintaining polymorphic compatibility for 2.x.
+
 # 0.0.7
 
 - **Fixed Static Analysis Issues**: Removed explicit `ProviderBase` type dependencies to ensure a perfect 160/160 pub.dev score and compatibility across all Riverpod environments.
