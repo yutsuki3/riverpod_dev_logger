@@ -21,7 +21,7 @@ Add `riverpod_dev_logger` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  riverpod_dev_logger: ^0.0.8
+  riverpod_dev_logger: ^0.0.9
 ```
 
 ## Setup

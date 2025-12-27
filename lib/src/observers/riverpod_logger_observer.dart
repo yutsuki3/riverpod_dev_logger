@@ -23,10 +23,10 @@ base class RiverpodLoggerObserver extends ProviderObserver {
       [dynamic container, ProviderContainer? unusedContainer]) {
     final (actualProvider, actualContainer) =
         _resolveContext(provider, value, container);
-    final actualValue = _isContext(provider) ? value : container;
 
+    // In both 2.x (p, v, c) and 3.x (ctx, v), 'value' is accurately the 2nd param.
     _runInContext(actualProvider, actualContainer, () {
-      _logger.debug('Provider initialized with: $actualValue');
+      _logger.debug('Provider initialized with: $value');
     });
   }
 
@@ -42,12 +42,11 @@ base class RiverpodLoggerObserver extends ProviderObserver {
     final (actualProvider, actualContainer) =
         _resolveContext(provider, previousValue, container);
 
-    final actualPreviousValue = _isContext(provider) ? previousValue : newValue;
-    final actualNewValue = _isContext(provider) ? newValue : container;
-
+    // In both 2.x (p, pv, nv, c) and 3.x (ctx, pv, nv),
+    // previousValue and newValue are at indices 1 and 2.
     _runInContext(actualProvider, actualContainer, () {
       if (_logger.isStateDiffEnabled) {
-        final diff = _diffEngine.diff(actualPreviousValue, actualNewValue);
+        final diff = _diffEngine.diff(previousValue, newValue);
         if (diff.hasChanges) {
           final formattedDiff = _diffFormatter.format(diff);
           _logger.info(formattedDiff);
@@ -55,7 +54,7 @@ base class RiverpodLoggerObserver extends ProviderObserver {
           _logger.debug('Provider updated (no detected state changes)');
         }
       } else {
-        _logger.info('Provider updated: $actualPreviousValue -> $actualNewValue');
+        _logger.info('Provider updated: $previousValue -> $newValue');
       }
     });
   }
@@ -83,12 +82,9 @@ base class RiverpodLoggerObserver extends ProviderObserver {
     final (actualProvider, actualContainer) =
         _resolveContext(provider, error, container);
 
-    final actualError = _isContext(provider) ? error : stackTrace;
-    final actualStackTrace =
-        _isContext(provider) ? stackTrace : container as StackTrace;
-
+    // In both versions, error and stackTrace are at indices 1 and 2.
     _runInContext(actualProvider, actualContainer, () {
-      _logger.error('Provider failed', actualError, actualStackTrace);
+      _logger.error('Provider failed', error, stackTrace);
     });
   }
 

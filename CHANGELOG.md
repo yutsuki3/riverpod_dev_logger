@@ -1,3 +1,8 @@
+# 0.0.9
+
+- **Fixed Parameter Mapping Bug**: Resolved an issue where state values were incorrectly logged as "Instance of 'ProviderContainer'" in some Riverpod versions.
+- Improved log message clarity for provider initialization and updates.
+
 # 0.0.8
 
 - **Final Analysis Score Optimization**: Resolved remaining naming lints and parameter mismatches to achieve a perfect 160/160 score on pub.dev.

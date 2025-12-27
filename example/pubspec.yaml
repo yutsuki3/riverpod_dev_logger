@@ -6,7 +6,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  riverpod: ^2.6.1
+  riverpod: '>=2.0.0 <4.0.0'
   riverpod_dev_logger:
     path: ../
 
