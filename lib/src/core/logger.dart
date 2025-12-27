@@ -14,16 +14,21 @@ class RiverpodDevLogger {
   static LogLevel _level = LogLevel.info;
   static LogFormatter _formatter = ConsoleFormatter();
   static bool _enableContextDetection = true;
+  static bool _enableStateDiff = true;
 
   static void configure({
     LogLevel? level,
     LogFormatter? formatter,
     bool? enableContextDetection,
+    bool? enableStateDiff,
   }) {
     if (level != null) _level = level;
     if (formatter != null) _formatter = formatter;
     if (enableContextDetection != null) _enableContextDetection = enableContextDetection;
+    if (enableStateDiff != null) _enableStateDiff = enableStateDiff;
   }
+
+  bool get isStateDiffEnabled => _enableStateDiff;
 
   void debug(String message) => _log(LogLevel.debug, message);
   void info(String message) => _log(LogLevel.info, message);

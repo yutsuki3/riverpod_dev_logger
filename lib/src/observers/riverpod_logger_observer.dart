@@ -2,9 +2,13 @@ import 'package:riverpod/riverpod.dart';
 import '../core/logger.dart';
 import '../context/context_detector.dart';
 import '../context/provider_context.dart';
+import '../diff/diff_engine.dart';
+import '../diff/diff_formatters/console_diff_formatter.dart';
 
 class RiverpodLoggerObserver extends ProviderObserver {
   final RiverpodDevLogger _logger;
+  final _diffEngine = DiffEngine();
+  final _diffFormatter = ConsoleDiffFormatter();
 
   RiverpodLoggerObserver({RiverpodDevLogger? logger}) 
       : _logger = logger ?? RiverpodDevLogger();
@@ -28,7 +32,17 @@ class RiverpodLoggerObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     _runInContext(provider, container, () {
-      _logger.info('Provider updated: $previousValue -> $newValue');
+      if (_logger.isStateDiffEnabled) {
+        final diff = _diffEngine.diff(previousValue, newValue);
+        if (diff.hasChanges) {
+          final formattedDiff = _diffFormatter.format(diff);
+          _logger.info(formattedDiff);
+        } else {
+          _logger.debug('Provider updated (no detected state changes)');
+        }
+      } else {
+        _logger.info('Provider updated: $previousValue -> $newValue');
+      }
     });
   }
 
