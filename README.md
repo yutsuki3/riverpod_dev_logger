@@ -7,6 +7,7 @@ A developer-focused logging package for Riverpod 3.0+ that automatically detects
 - **Automatic Provider Context Detection**: No more manual tags! Logs automatically include the name and type of the provider that emitted them via Dart Zones.
 - **Riverpod 3.0 Ready**: Built explicitly for the latest Riverpod features and patterns.
 - **Structured Console Output**: Beautifully organized logs with level, provider info, dependencies, and extra metadata.
+- **State Diff Tracking**: Automatically detect and log state changes. Visualizes additions, removals, and modifications for both primitives and complex collections.
 - **Hierarchical Loggers**: Use `.bind()` to create child loggers with additional context like `userId` or `requestId`.
 - **Extensible Formatters**: Easily customize how logs are printed or sent to remote services.
 
@@ -16,7 +17,7 @@ Add `riverpod_dev_logger` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  riverpod_dev_logger: ^0.0.1
+  riverpod_dev_logger: ^0.0.2
 ```
 
 ## Setup
@@ -31,6 +32,7 @@ void main() {
   RiverpodDevLogger.configure(
     level: LogLevel.debug,
     enableContextDetection: true,
+    enableStateDiff: true, // Enabled by default
   );
 
   final container = ProviderContainer(
@@ -68,9 +70,19 @@ final authenticatedLogger = ref.logger.bind(userId: 'user_123');
 authenticatedLogger.info('User action performed');
 ```
 
-Output:
-`[INFO] [Provider:MyProvider] [Dependencies:none] User action performed`
-`  Extra: {userId: user_123}`
+### State Diff Tracking
+
+The logger automatically detects changes when state is updated. Works out-of-the-box for:
+- Primitive types (`int`, `String`, `bool`, etc.)
+- Collections (`List`, `Map`, `Set`)
+- Custom objects (supports `Freezed`, `json_serializable`, and `Equatable` via `toJson()`)
+
+Output Example:
+```
+[INFO] [Provider:TodoProvider] State changed:
+  ~ name: 'Old Task' → 'New Task'
+  + priority: 'high'
+```
 
 ## License
 
