@@ -18,16 +18,21 @@ base class RiverpodLoggerObserver extends ProviderObserver {
       : _logger = logger ?? RiverpodDevLogger();
 
   @override
-  void didAddProvider(ProviderObserverContext context, Object? value) {
-    _runInContext(context.provider, context.container, () {
+  void didAddProvider(
+      ProviderBase<Object?> provider, Object? value, ProviderContainer container) {
+    _runInContext(provider, container, () {
       _logger.debug('Provider initialized with: $value');
     });
   }
 
   @override
-  void didUpdateProvider(ProviderObserverContext context, Object? previousValue,
-      Object? newValue) {
-    _runInContext(context.provider, context.container, () {
+  void didUpdateProvider(
+    ProviderBase<Object?> provider,
+    Object? previousValue,
+    Object? newValue,
+    ProviderContainer container,
+  ) {
+    _runInContext(provider, container, () {
       if (_logger.isStateDiffEnabled) {
         final diff = _diffEngine.diff(previousValue, newValue);
         if (diff.hasChanges) {
@@ -43,16 +48,21 @@ base class RiverpodLoggerObserver extends ProviderObserver {
   }
 
   @override
-  void didDisposeProvider(ProviderObserverContext context) {
-    _runInContext(context.provider, context.container, () {
+  void didDisposeProvider(
+      ProviderBase<Object?> provider, ProviderContainer container) {
+    _runInContext(provider, container, () {
       _logger.debug('Provider disposed');
     });
   }
 
   @override
   void providerDidFail(
-      ProviderObserverContext context, Object error, StackTrace stackTrace) {
-    _runInContext(context.provider, context.container, () {
+    ProviderBase<Object?> provider,
+    Object error,
+    StackTrace stackTrace,
+    ProviderContainer container,
+  ) {
+    _runInContext(provider, container, () {
       _logger.error('Provider failed', error, stackTrace);
     });
   }

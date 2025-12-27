@@ -4,12 +4,12 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yutsuki3/riverpod_dev_logger/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/yutsuki3/riverpod_dev_logger.svg?style=social)](https://github.com/yutsuki3/riverpod_dev_logger/stargazers)
 
-A developer-focused logging package for Riverpod 3.0+ that automatically detects and logs Provider execution context using Dart Zones.
+A developer-focused logging package for Riverpod 2.0+ that automatically detects and logs Provider execution context using Dart Zones.
 
 ## Features
 
 - **Automatic Provider Context Detection**: No more manual tags! Logs automatically include the name and type of the provider that emitted them via Dart Zones.
-- **Riverpod 3.0 Ready**: Built explicitly for the latest Riverpod features and patterns.
+- **Riverpod 2.0+ Ready**: Built explicitly for the latest Riverpod features and patterns, with support for 2.x and 3.x.
 - **Structured Console Output**: Beautifully organized logs with level, provider info, dependencies, and extra metadata.
 - **State Diff Tracking**: Automatically detect and log state changes. Visualizes additions, removals, and modifications for both primitives and complex collections.
 - **Hierarchical Loggers**: Use `.bind()` to create child loggers with additional context like `userId` or `requestId`.

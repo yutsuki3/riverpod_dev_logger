@@ -1,3 +1,8 @@
+# 0.0.5
+
+- **Downgraded to Riverpod 2.0+ support** for broader compatibility.
+- Refactored `RiverpodLoggerObserver` to support Riverpod 2.x API signatures.
+
 # 0.0.4
 
 - Added comprehensive dartdoc documentation for all public APIs.

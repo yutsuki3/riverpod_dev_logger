@@ -1,6 +1,5 @@
 import 'package:test/test.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod/legacy.dart';
 import 'package:riverpod_dev_logger/riverpod_dev_logger.dart';
 
 void main() {
