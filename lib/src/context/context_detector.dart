@@ -2,18 +2,16 @@ import 'dart:async';
 import 'provider_context.dart';
 
 class ContextDetector {
-  static const Symbol _contextKey = #riverpod_dev_logger_context;
+  static const _zoneKey = #riverpod_dev_logger_context;
 
   static ProviderContext? get currentContext {
-    return Zone.current[_contextKey] as ProviderContext?;
+    return Zone.current[_zoneKey] as ProviderContext?;
   }
 
   static R runWithContext<R>(ProviderContext context, R Function() action) {
     return runZoned(
       action,
-      zoneValues: {
-        _contextKey: context,
-      },
+      zoneValues: {_zoneKey: context},
     );
   }
 }

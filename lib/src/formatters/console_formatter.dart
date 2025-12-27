@@ -4,26 +4,31 @@ import 'formatter.dart';
 
 class ConsoleFormatter implements LogFormatter {
   @override
-  List<String> format(LogEvent event, {List<String> tags = const []}) {
-    final buffer = <String>[];
-    final levelStr = event.level.name.toUpperCase().padRight(7);
-    final timeStr = event.time.toIso8601String().split('T').last.substring(0, 12);
+  List<String> format(LogEvent event) {
+    final level = event.level.name.toUpperCase();
+    String provider = event.context?.providerName ?? 'unknown';
     
-    final tagStr = tags.isEmpty ? '' : '[${tags.join(' > ')}] ';
-    final contextStr = event.context != null 
-        ? ' (in ${event.context!.providerName}${event.context!.mutation != null ? ' | mutation: ${event.context!.mutation}' : ''})' 
-        : '';
+    // Fallback to extra if context is missing
+    if (provider == 'unknown' && event.extra != null) {
+      provider = event.extra!['provider']?.toString() ?? 'unknown';
+    }
 
-    buffer.add('[$timeStr] $levelStr $tagStr${event.message}$contextStr');
+    final deps = event.context?.dependencies?.join(', ') ?? 'none';
+    
+    final buffer = <String>[];
+    buffer.add('[$level] [Provider:$provider] [Dependencies:$deps] ${event.message}');
+    
+    if (event.extra != null && event.extra!.isNotEmpty) {
+      buffer.add('  Extra: ${event.extra}');
+    }
 
     if (event.error != null) {
-      buffer.add('Error: ${event.error}');
+      buffer.add('  Error: ${event.error}');
     }
-
     if (event.stackTrace != null) {
-      buffer.add('StackTrace:\n${event.stackTrace}');
+      buffer.add('  StackTrace:\n${event.stackTrace}');
     }
-
+    
     return buffer;
   }
 }

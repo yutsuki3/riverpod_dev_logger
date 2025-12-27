@@ -33,9 +33,19 @@ class TodoNotifier extends Notifier<List<String>> {
 final todoProvider = NotifierProvider<TodoNotifier, List<String>>(TodoNotifier.new, name: 'TodoProvider');
 
 void main() {
-  // 4. Initialize ProviderContainer with the observer
+  // 4. Configure the logger
+  RiverpodDevLogger.configure(
+    level: LogLevel.debug,
+    enableContextDetection: true,
+  );
+
+  // 5. Initialize ProviderContainer with the observer
   final container = ProviderContainer(
-    observers: [RiverpodLoggerObserver()],
+    observers: [
+      RiverpodLoggerObserver(
+        logger: RiverpodDevLogger(),
+      ),
+    ],
   );
 
   print('--- Riverpod Dev Logger Example ---\n');

@@ -4,9 +4,10 @@ import '../context/context_detector.dart';
 import '../context/provider_context.dart';
 
 class RiverpodLoggerObserver extends ProviderObserver {
-  final Logger _logger;
+  final RiverpodDevLogger _logger;
 
-  RiverpodLoggerObserver({Logger? logger}) : _logger = logger ?? Logger();
+  RiverpodLoggerObserver({RiverpodDevLogger? logger}) 
+      : _logger = logger ?? RiverpodDevLogger();
 
   @override
   void didAddProvider(
@@ -14,12 +15,8 @@ class RiverpodLoggerObserver extends ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    final context = ProviderContext(
-      providerName: provider.name ?? provider.runtimeType.toString(),
-    );
-
-    ContextDetector.runWithContext(context, () {
-      _logger.debug('Provider initialized with value: $value');
+    _runInContext(provider, container, () {
+      _logger.debug('Provider initialized with: $value');
     });
   }
 
@@ -30,12 +27,8 @@ class RiverpodLoggerObserver extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    final context = ProviderContext(
-      providerName: provider.name ?? provider.runtimeType.toString(),
-    );
-
-    ContextDetector.runWithContext(context, () {
-      _logger.debug('Provider updated: $previousValue -> $newValue');
+    _runInContext(provider, container, () {
+      _logger.info('Provider updated: $previousValue -> $newValue');
     });
   }
 
@@ -44,11 +37,7 @@ class RiverpodLoggerObserver extends ProviderObserver {
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    final context = ProviderContext(
-      providerName: provider.name ?? provider.runtimeType.toString(),
-    );
-
-    ContextDetector.runWithContext(context, () {
+    _runInContext(provider, container, () {
       _logger.debug('Provider disposed');
     });
   }
@@ -60,12 +49,25 @@ class RiverpodLoggerObserver extends ProviderObserver {
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
+    _runInContext(provider, container, () {
+      _logger.error('Provider failed', error, stackTrace);
+    });
+  }
+
+  void _runInContext(
+    ProviderBase provider, 
+    ProviderContainer container,
+    void Function() action,
+  ) {
+    // Attempt to find dependencies (this is tricky in Riverpod 2.x/3.x without internal access,
+    // but we can try to get them if available or just log the provider info)
+    final dependencies = <String>[];
+    
     final context = ProviderContext(
       providerName: provider.name ?? provider.runtimeType.toString(),
+      providerType: provider.runtimeType.toString(),
+      dependencies: dependencies.isEmpty ? null : dependencies,
     );
-
-    ContextDetector.runWithContext(context, () {
-      _logger.error('Provider failed', error: error, stackTrace: stackTrace);
-    });
+    ContextDetector.runWithContext(context, action);
   }
 }

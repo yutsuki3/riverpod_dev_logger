@@ -1,19 +1,19 @@
 import 'package:riverpod/riverpod.dart';
 import '../core/logger.dart';
-import 'context_detector.dart';
-import 'provider_context.dart';
 
-extension LoggerProviderX on Ref {
-  Logger get logger {
-    final context = ProviderContext(
-      providerName: 'Provider', // We could try to get the actual name if available
-    );
-    return ContextDetector.runWithContext(context, () => Logger());
-  }
-}
+typedef Logger = RiverpodDevLogger;
 
-extension LoggerWidgetRefX on WidgetRef {
+extension RiverpodDevLoggerRefX on Ref {
   Logger get logger {
-    return Logger(tags: ['Widget']);
+    String? providerName;
+    try {
+      // Accessing provider name if available on the element
+      // ignore: avoid_dynamic_calls
+      providerName = (this as dynamic).provider.name;
+    } catch (_) {}
+    
+    return RiverpodDevLogger().bind(extra: {
+      'provider': providerName ?? runtimeType.toString(),
+    });
   }
 }

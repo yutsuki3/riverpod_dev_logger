@@ -7,6 +7,7 @@ class LogEvent {
   final Object? error;
   final StackTrace? stackTrace;
   final ProviderContext? context;
+  final Map<String, dynamic>? extra;
   final DateTime time;
 
   LogEvent({
@@ -15,6 +16,7 @@ class LogEvent {
     this.error,
     this.stackTrace,
     this.context,
+    this.extra,
     DateTime? time,
   }) : time = time ?? DateTime.now();
 }
