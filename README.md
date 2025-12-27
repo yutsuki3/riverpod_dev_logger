@@ -1,5 +1,9 @@
 # riverpod_dev_logger
 
+[![pub package](https://img.shields.io/pub/v/riverpod_dev_logger.svg)](https://pub.dev/packages/riverpod_dev_logger)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yutsuki3/riverpod_dev_logger/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/yutsuki3/riverpod_dev_logger.svg?style=social)](https://github.com/yutsuki3/riverpod_dev_logger/stargazers)
+
 A developer-focused logging package for Riverpod 3.0+ that automatically detects and logs Provider execution context using Dart Zones.
 
 ## Features
