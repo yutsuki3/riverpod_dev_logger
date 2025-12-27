@@ -22,11 +22,18 @@ class RiverpodDevLogger {
     bool? enableContextDetection,
     bool? enableStateDiff,
   }) {
-    if (level != null) _level = level;
-    if (formatter != null) _formatter = formatter;
-    if (enableContextDetection != null)
+    if (level != null) {
+      _level = level;
+    }
+    if (formatter != null) {
+      _formatter = formatter;
+    }
+    if (enableContextDetection != null) {
       _enableContextDetection = enableContextDetection;
-    if (enableStateDiff != null) _enableStateDiff = enableStateDiff;
+    }
+    if (enableStateDiff != null) {
+      _enableStateDiff = enableStateDiff;
+    }
   }
 
   bool get isStateDiffEnabled => _enableStateDiff;
@@ -57,7 +64,9 @@ class RiverpodDevLogger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    if (level.index < _level.index) return;
+    if (level.index < _level.index) {
+      return;
+    }
 
     final context =
         _enableContextDetection ? ContextDetector.currentContext : null;

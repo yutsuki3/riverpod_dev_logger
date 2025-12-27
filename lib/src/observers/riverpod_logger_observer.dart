@@ -5,7 +5,7 @@ import '../context/provider_context.dart';
 import '../diff/diff_engine.dart';
 import '../diff/diff_formatters/console_diff_formatter.dart';
 
-class RiverpodLoggerObserver extends ProviderObserver {
+base class RiverpodLoggerObserver extends ProviderObserver {
   final RiverpodDevLogger _logger;
   final _diffEngine = DiffEngine();
   final _diffFormatter = ConsoleDiffFormatter();
@@ -14,24 +14,16 @@ class RiverpodLoggerObserver extends ProviderObserver {
       : _logger = logger ?? RiverpodDevLogger();
 
   @override
-  void didAddProvider(
-    ProviderBase<Object?> provider,
-    Object? value,
-    ProviderContainer container,
-  ) {
-    _runInContext(provider, container, () {
+  void didAddProvider(ProviderObserverContext context, Object? value) {
+    _runInContext(context.provider, context.container, () {
       _logger.debug('Provider initialized with: $value');
     });
   }
 
   @override
   void didUpdateProvider(
-    ProviderBase<Object?> provider,
-    Object? previousValue,
-    Object? newValue,
-    ProviderContainer container,
-  ) {
-    _runInContext(provider, container, () {
+      ProviderObserverContext context, Object? previousValue, Object? newValue) {
+    _runInContext(context.provider, context.container, () {
       if (_logger.isStateDiffEnabled) {
         final diff = _diffEngine.diff(previousValue, newValue);
         if (diff.hasChanges) {
@@ -47,29 +39,22 @@ class RiverpodLoggerObserver extends ProviderObserver {
   }
 
   @override
-  void didDisposeProvider(
-    ProviderBase<Object?> provider,
-    ProviderContainer container,
-  ) {
-    _runInContext(provider, container, () {
+  void didDisposeProvider(ProviderObserverContext context) {
+    _runInContext(context.provider, context.container, () {
       _logger.debug('Provider disposed');
     });
   }
 
   @override
   void providerDidFail(
-    ProviderBase<Object?> provider,
-    Object error,
-    StackTrace stackTrace,
-    ProviderContainer container,
-  ) {
-    _runInContext(provider, container, () {
+      ProviderObserverContext context, Object error, StackTrace stackTrace) {
+    _runInContext(context.provider, context.container, () {
       _logger.error('Provider failed', error, stackTrace);
     });
   }
 
   void _runInContext(
-    ProviderBase provider,
+    dynamic provider,
     ProviderContainer container,
     void Function() action,
   ) {

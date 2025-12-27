@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  clock:
+    dependency: transitive
+    description:
+      name: clock
+      sha256: fddb70d9b5277016c77a80201021d40a2247104d9f4aa7bab7157b7e3f05b84b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   collection:
     dependency: transitive
     description:
@@ -81,14 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.7"
-  diff_match_patch:
-    dependency: transitive
-    description:
-      name: diff_match_patch
-      sha256: "2efc9e6e8f449d0abe15be240e2c2a3bcd977c8d126cfd70598aee60af35c0a4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.1"
   file:
     dependency: transitive
     description:
@@ -229,18 +229,10 @@ packages:
     dependency: "direct main"
     description:
       name: riverpod
-      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
+      sha256: "16ff608d21e8ea64364f2b7c049c94a02ab81668f78845862b6e88b71dd4935a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
-  riverpod_test:
-    dependency: "direct dev"
-    description:
-      name: riverpod_test
-      sha256: "955ca5bb4dd8927c1e631827414227c62844467d619562d93f4b9f67a4bc1a70"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.9"
+    version: "3.1.0"
   shelf:
     dependency: transitive
     description:

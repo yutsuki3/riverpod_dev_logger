@@ -1,5 +1,3 @@
-library riverpod_dev_logger;
-
 export 'src/core/logger.dart';
 export 'src/core/log_level.dart';
 export 'src/core/log_event.dart';

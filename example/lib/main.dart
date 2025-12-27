@@ -1,4 +1,5 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:riverpod/legacy.dart';
 import 'package:riverpod_dev_logger/riverpod_dev_logger.dart';
 
 // 1. Create a logger instance (optional, logger methods are static or via Ref extension)
