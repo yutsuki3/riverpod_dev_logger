@@ -1,3 +1,6 @@
+/// A developer-focused logging package for Riverpod with automatic provider context detection.
+library;
+
 export 'src/core/logger.dart';
 export 'src/core/log_level.dart';
 export 'src/core/log_event.dart';

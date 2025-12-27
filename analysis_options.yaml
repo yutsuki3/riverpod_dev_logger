@@ -1,4 +1,7 @@
 include: package:lints/recommended.yaml
+analyzer:
+  exclude:
+    - "example/**"
 
 linter:
   rules:
@@ -6,5 +9,6 @@ linter:
     always_declare_return_types: true
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
+    public_member_api_docs: true
     unawaited_futures: true
     use_super_parameters: true

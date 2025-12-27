@@ -1,3 +1,9 @@
+# 0.0.4
+
+- Added comprehensive dartdoc documentation for all public APIs.
+- Fixed formatting issues across the project.
+- Enabled `public_member_api_docs` lint rule to ensure documentation quality.
+
 # 0.0.3
 
 - **Upgraded to Riverpod 3.1.0**.

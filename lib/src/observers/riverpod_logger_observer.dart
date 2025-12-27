@@ -5,11 +5,15 @@ import '../context/provider_context.dart';
 import '../diff/diff_engine.dart';
 import '../diff/diff_formatters/console_diff_formatter.dart';
 
+/// A [ProviderObserver] that automatically logs provider lifecycle events using [RiverpodDevLogger].
 base class RiverpodLoggerObserver extends ProviderObserver {
   final RiverpodDevLogger _logger;
   final _diffEngine = DiffEngine();
   final _diffFormatter = ConsoleDiffFormatter();
 
+  /// Creates a [RiverpodLoggerObserver].
+  ///
+  /// An optional [logger] can be provided, otherwise a default instance is used.
   RiverpodLoggerObserver({RiverpodDevLogger? logger})
       : _logger = logger ?? RiverpodDevLogger();
 
@@ -21,8 +25,8 @@ base class RiverpodLoggerObserver extends ProviderObserver {
   }
 
   @override
-  void didUpdateProvider(
-      ProviderObserverContext context, Object? previousValue, Object? newValue) {
+  void didUpdateProvider(ProviderObserverContext context, Object? previousValue,
+      Object? newValue) {
     _runInContext(context.provider, context.container, () {
       if (_logger.isStateDiffEnabled) {
         final diff = _diffEngine.diff(previousValue, newValue);

@@ -4,11 +4,13 @@ import '../context/context_detector.dart';
 import '../formatters/formatter.dart';
 import '../formatters/console_formatter.dart';
 
+/// A developer-focused logger for Riverpod with automatic context detection.
 class RiverpodDevLogger {
   final Map<String, dynamic>? _extra;
 
   RiverpodDevLogger._([this._extra]);
 
+  /// Creates a [RiverpodDevLogger].
   factory RiverpodDevLogger() => RiverpodDevLogger._();
 
   static LogLevel _level = LogLevel.info;
@@ -16,6 +18,7 @@ class RiverpodDevLogger {
   static bool _enableContextDetection = true;
   static bool _enableStateDiff = true;
 
+  /// Configures the global logging settings.
   static void configure({
     LogLevel? level,
     LogFormatter? formatter,
@@ -36,14 +39,23 @@ class RiverpodDevLogger {
     }
   }
 
+  /// Whether state diff tracking is enabled globally.
   bool get isStateDiffEnabled => _enableStateDiff;
 
+  /// Logs a [message] at the debug level.
   void debug(String message) => _log(LogLevel.debug, message);
+
+  /// Logs a [message] at the info level.
   void info(String message) => _log(LogLevel.info, message);
+
+  /// Logs a [message] at the warning level.
   void warning(String message) => _log(LogLevel.warning, message);
+
+  /// Logs a [message] at the error level with optional [error] and [stackTrace].
   void error(String message, [Object? error, StackTrace? stackTrace]) =>
       _log(LogLevel.error, message, error: error, stackTrace: stackTrace);
 
+  /// Creates a child logger with additional [userId], [sessionId], or [extra] metadata.
   RiverpodDevLogger bind({
     String? userId,
     String? sessionId,

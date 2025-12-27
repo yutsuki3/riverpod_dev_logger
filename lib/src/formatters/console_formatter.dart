@@ -1,7 +1,9 @@
 import '../core/log_event.dart';
 import 'formatter.dart';
 
+/// A formatter that outputs logs in a structured console format with provider information.
 class ConsoleFormatter implements LogFormatter {
+  /// Formats the [event] into a list of strings ready for console output.
   @override
   List<String> format(LogEvent event) {
     final level = event.level.name.toUpperCase();

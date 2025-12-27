@@ -1,6 +1,8 @@
 import 'diff_result.dart';
 
+/// An engine that calculates differences between two objects, supporting primitives and collections.
 class DiffEngine {
+  /// Compares [previous] and [next] and returns a [DiffResult] containing the changes.
   DiffResult diff(Object? previous, Object? next) {
     if (identical(previous, next)) {
       return DiffResult();

@@ -2,7 +2,9 @@ import 'dart:convert';
 import '../diff_result.dart';
 import 'diff_formatter.dart';
 
+/// A formatter that outputs state differences in JSON format.
 class JsonDiffFormatter implements DiffFormatter {
+  /// Formats the [result] into a JSON string.
   @override
   String format(DiffResult result) {
     final map = {
