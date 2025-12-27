@@ -21,12 +21,12 @@ Add `riverpod_dev_logger` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  riverpod_dev_logger: ^0.0.4
+  riverpod_dev_logger: ^0.0.6
 ```
 
 ## Setup
 
-Initialize the logger and add the observer to your `ProviderScope`:
+Initialize the logger and add the observer to your `ProviderContainer`:
 
 ```dart
 import 'package:riverpod/riverpod.dart';
