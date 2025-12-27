@@ -1,3 +1,9 @@
+# 0.0.6
+
+- **Optimized Pub.dev Score**: Expanded Riverpod dependency range to `'>=2.0.0 <4.0.0'` to support the latest versions and improve package health score.
+- **Multi-Version Support**: Refactored `RiverpodLoggerObserver` to handle both Riverpod 2.x and 3.x API signatures simultaneously.
+- Updated `meta` dependency to `^1.15.0`.
+
 # 0.0.5
 
 - **Downgraded to Riverpod 2.0+ support** for broader compatibility.

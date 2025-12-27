@@ -1,6 +1,6 @@
 name: riverpod_dev_logger
 description: A developer-focused logging package for Riverpod with automatic provider context detection using Dart Zones. Supports Riverpod 2.0+.
-version: 0.0.5
+version: 0.0.6
 repository: https://github.com/yutsuki3/riverpod_dev_logger
 homepage: https://github.com/yutsuki3/riverpod_dev_logger
 topics:
@@ -13,8 +13,8 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  riverpod: ^2.6.1
-  meta: ^1.9.0
+  riverpod: '>=2.0.0 <4.0.0'
+  meta: ^1.15.0
 
 dev_dependencies:
   lints: ^5.1.1
