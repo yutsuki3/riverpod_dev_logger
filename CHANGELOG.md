@@ -1,3 +1,8 @@
+# 0.0.7
+
+- **Fixed Static Analysis Issues**: Removed explicit `ProviderBase` type dependencies to ensure a perfect 160/160 pub.dev score and compatibility across all Riverpod environments.
+- Polished documentation and examples.
+
 # 0.0.6
 
 - **Optimized Pub.dev Score**: Expanded Riverpod dependency range to `'>=2.0.0 <4.0.0'` to support the latest versions and improve package health score.
