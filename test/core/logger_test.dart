@@ -35,13 +35,42 @@ void main() {
       expect(output[1], contains('Extra: {id: 1}'));
     });
 
-    test('should respects log level configuration', () {
-      RiverpodDevLogger.configure(level: LogLevel.error);
-      // This is hard to test without intercepting print or injecting a mock formatter.
-      // But we can verify it doesn't throw.
+    test('should respect log level configuration', () {
+      // Create a mock formatter that captures logged events
+      final capturedEvents = <LogEvent>[];
+      final mockFormatter = _MockFormatter(capturedEvents);
+
+      RiverpodDevLogger.configure(
+        level: LogLevel.error,
+        formatter: mockFormatter,
+      );
+
       final logger = RiverpodDevLogger();
+      logger.debug('Should not be logged');
       logger.info('Should not be logged');
+      logger.warning('Should not be logged');
       logger.error('Should be logged');
+
+      // Verify only error level message was logged
+      expect(capturedEvents.length, equals(1));
+      expect(capturedEvents[0].level, equals(LogLevel.error));
+      expect(capturedEvents[0].message, equals('Should be logged'));
+
+      // Reset configuration
+      RiverpodDevLogger.configure(level: LogLevel.debug);
     });
   });
+}
+
+/// Mock formatter that captures log events for testing.
+class _MockFormatter implements LogFormatter {
+  final List<LogEvent> capturedEvents;
+
+  _MockFormatter(this.capturedEvents);
+
+  @override
+  List<String> format(LogEvent event) {
+    capturedEvents.add(event);
+    return ['Mock output: ${event.message}'];
+  }
 }
