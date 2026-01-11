@@ -1,3 +1,15 @@
+# 0.1.0
+
+- **First Stable Release**: Production-ready version with comprehensive test coverage and documentation.
+- **Riverpod 2.0-4.0 Support**: Fully compatible with Riverpod 2.x, 3.x, and 4.x versions.
+- **Complete Feature Set**:
+  - Automatic provider context detection using Dart Zones
+  - State diff tracking for Map, List, Set, and custom objects
+  - Flexible logging formatters (Console, JSON)
+  - RiverpodLoggerObserver integration
+  - Ref extension for easy logging
+- **High Quality Standards**: Perfect pub.dev score, comprehensive dartdoc documentation, and strict lint compliance.
+
 # 0.0.9
 
 - **Fixed Parameter Mapping Bug**: Resolved an issue where state values were incorrectly logged as "Instance of 'ProviderContainer'" in some Riverpod versions.
